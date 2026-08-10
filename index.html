@@ -2,33 +2,189 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Giới thiệu bản thân</title>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- CSS riêng -->
-    <link rel="stylesheet" href="style.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: linear-gradient(145deg, #0a0a1a 0%, #1a1040 50%, #0d0d2b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #universe-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            image-rendering: auto;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        .card {
+            max-width: 820px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 3.5rem;
+            padding: 2.8rem 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.8), inset 0 1px 2px rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        .avatar {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 12px 24px -8px rgba(108,92,231,0.5), 0 0 60px rgba(108,92,231,0.2);
+            border: 3px solid rgba(255,255,255,0.15);
+            animation: glowPulse 3s ease-in-out infinite;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+        }
+        .avatar:hover { transform: scale(1.05) rotate(-5deg); }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 12px 24px -8px rgba(108,92,231,0.5), 0 0 60px rgba(108,92,231,0.2); }
+            50% { box-shadow: 0 12px 40px -8px rgba(108,92,231,0.8), 0 0 80px rgba(108,92,231,0.4); }
+        }
+        .avatar i { font-size: 4.5rem; color: white; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        h1 {
+            font-size: 2.6rem; font-weight: 700; color: #ffffff;
+            text-shadow: 0 0 30px rgba(162,155,254,0.3);
+        }
+        .bio {
+            font-size: 1.05rem; color: #c8c0e8;
+            max-width: 500px; margin: 0.5rem auto 2rem;
+            background: rgba(255,255,255,0.04);
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-grid {
+            display: flex; flex-wrap: wrap;
+            justify-content: center; gap: 0.8rem 1rem;
+            margin: 2.2rem 0 1.2rem;
+        }
+        .social-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.75rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 600; font-size: 0.95rem;
+            color: #e0d8f0;
+            text-decoration: none;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(4px);
+            flex: 0 1 auto; min-width: 120px;
+            position: relative;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .social-btn i { font-size: 1.2rem; width: 1.5rem; text-align: center; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .social-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 28px -8px rgba(0,0,0,0.4); }
+        .social-btn:hover i { transform: scale(1.1); }
+        .social-btn:active { transform: scale(0.92) translateY(0px); transition-duration: 0.08s; }
+        .btn-youtube { border-color: rgba(255,0,0,0.15); }
+        .btn-youtube i { color: #ff0000; }
+        .btn-youtube:hover { background: #ff0000; border-color: #ff0000; color: white; box-shadow: 0 16px 28px -8px rgba(255,0,0,0.4); }
+        .btn-youtube:hover i { color: white; }
+        .btn-x { border-color: rgba(255,255,255,0.08); }
+        .btn-x i { color: #ffffff; }
+        .btn-x:hover { background: #000000; border-color: #ffffff; color: white; box-shadow: 0 16px 28px -8px rgba(255,255,255,0.2); }
+        .btn-x:hover i { color: white; }
+        .btn-instagram { border-color: rgba(228,64,95,0.15); }
+        .btn-instagram i { color: #e4405f; }
+        .btn-instagram:hover { background: #e4405f; border-color: #e4405f; color: white; box-shadow: 0 16px 28px -8px rgba(228,64,95,0.4); }
+        .btn-instagram:hover i { color: white; }
+        .btn-github { border-color: rgba(255,255,255,0.08); }
+        .btn-github i { color: #ffffff; }
+        .btn-github:hover { background: #181717; border-color: #ffffff; color: white; box-shadow: 0 16px 28px -8px rgba(255,255,255,0.15); }
+        .btn-github:hover i { color: white; }
+        .btn-tiktok { border-color: rgba(255,255,255,0.08); }
+        .btn-tiktok i { color: #ffffff; }
+        .btn-tiktok:hover { background: #010101; border-color: #ffffff; color: white; box-shadow: 0 16px 28px -8px rgba(255,255,255,0.15); }
+        .btn-tiktok:hover i { color: white; }
+        .highlight-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1.5px solid rgba(162,155,254,0.2);
+            font-weight: 700;
+            padding: 0.8rem 2rem;
+        }
+        .footer-note {
+            margin-top: 1.8rem;
+            font-size: 0.8rem;
+            color: #6a5a82;
+            opacity: 0.5;
+            border-top: 1px dashed rgba(162,155,254,0.1);
+            padding-top: 1.2rem;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            transform: scale(0);
+            animation: rippleAnim 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to { transform: scale(4); opacity: 0; }
+        }
+        @media (max-width: 550px) {
+            .card { padding: 1.8rem 1.2rem; border-radius: 2.5rem; }
+            h1 { font-size: 2rem; }
+            .social-btn { min-width: 100px; padding: 0.6rem 1rem; font-size: 0.85rem; flex: 1 1 40%; gap: 0.4rem; }
+            .social-btn i { font-size: 1rem; width: 1.2rem; }
+            .avatar { width: 100px; height: 100px; }
+            .avatar i { font-size: 3.5rem; }
+            .bio { font-size: 0.9rem; padding: 0.6rem 1.2rem; margin: 0.3rem auto 1.5rem; }
+            .highlight-btn { padding: 0.65rem 1.5rem; }
+            .footer-note { font-size: 0.7rem; margin-top: 1.2rem; padding-top: 0.8rem; }
+        }
+        @media (max-width: 400px) {
+            .social-grid { gap: 0.5rem; }
+            .social-btn { min-width: 100%; padding: 0.55rem 0.8rem; font-size: 0.8rem; }
+            .card { padding: 1.5rem 0.8rem; }
+        }
+        @media (max-width: 768px) {
+            .card { background: rgba(10,10,30,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+            #universe-canvas { opacity: 0.9; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ===== CANVAS HIỆU ỨNG SAO CHỔI ===== -->
     <canvas id="universe-canvas"></canvas>
 
-    <!-- ===== CARD GIỚI THIỆU ===== -->
     <div class="card">
-
         <div class="avatar">
             <i class="fas fa-user-astronaut"></i>
         </div>
-
         <h1>Minh Khôi</h1>
-
         <div class="bio">
-            <i class="fas fa-quote-left" style="opacity: 0.4; margin-right: 6px;"></i>
+            <i class="fas fa-quote-left" style="opacity:0.4;margin-right:6px;"></i>
             Khám phá vũ trụ &amp; kết nối không giới hạn
-            <i class="fas fa-quote-right" style="opacity: 0.4; margin-left: 6px;"></i>
+            <i class="fas fa-quote-right" style="opacity:0.4;margin-left:6px;"></i>
         </div>
-
         <div class="social-grid">
             <a href="#" class="social-btn btn-youtube highlight-btn" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-youtube"></i> YouTube
@@ -46,16 +202,345 @@
                 <i class="fab fa-tiktok"></i> TikTok
             </a>
         </div>
-
         <div class="footer-note">
-            <i class="fas fa-link" style="margin-right: 6px;"></i>
+            <i class="fas fa-link" style="margin-right:6px;"></i>
             YouTube &amp; X đang dùng link giữ chỗ — hãy thay bằng URL của bạn
         </div>
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
-    <script src="social.js" defer></script>
-    <script src="universe.js" defer></script>
+    <script>
+        // ===== XỬ LÝ SOCIAL LINKS =====
+        (function() {
+            const defaultLinks = {
+                'YouTube': 'https://www.youtube.com/@yourchannel',
+                'X': 'https://x.com/yourhandle',
+                'Instagram': 'https://www.instagram.com/yourprofile',
+                'GitHub': 'https://github.com/yourusername',
+                'TikTok': 'https://www.tiktok.com/@yourhandle'
+            };
+
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                const text = btn.textContent.trim();
+                let platform = '';
+                if (text.includes('YouTube')) platform = 'YouTube';
+                else if (text.includes('X')) platform = 'X';
+                else if (text.includes('Instagram')) platform = 'Instagram';
+                else if (text.includes('GitHub')) platform = 'GitHub';
+                else if (text.includes('TikTok')) platform = 'TikTok';
+
+                if (platform && defaultLinks[platform]) {
+                    if (btn.getAttribute('href') === '#' || btn.getAttribute('href') === '') {
+                        btn.setAttribute('href', defaultLinks[platform]);
+                    }
+                }
+            });
+
+            // ===== HIỆU ỨNG RIPPLE =====
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    const rect = this.getBoundingClientRect();
+                    const ripple = document.createElement('span');
+                    const size = Math.max(rect.width, rect.height);
+                    const x = clientX - rect.left - size / 2;
+                    const y = clientY - rect.top - size / 2;
+
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.className = 'ripple';
+
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+
+                    setTimeout(() => { ripple.remove(); }, 600);
+                });
+            });
+        })();
+
+        // ===== HIỆU ỨNG VŨ TRỤ =====
+        (function() {
+            const canvas = document.getElementById('universe-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let stars = [], comets = [], particles = [];
+            let animationId = null, lastTime = 0;
+            let isMobile = window.innerWidth < 768;
+
+            const getCounts = () => {
+                const w = window.innerWidth;
+                if (w < 400) return { stars: 120, comets: 3, particles: 30 };
+                else if (w < 768) return { stars: 180, comets: 4, particles: 50 };
+                else return { stars: 250, comets: 5, particles: 80 };
+            };
+
+            let counts = getCounts();
+
+            let resizeTimeout;
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = width * dpr;
+                canvas.height = height * dpr;
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+                ctx.scale(dpr, dpr);
+                isMobile = width < 768;
+                counts = getCounts();
+            }
+
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    resizeCanvas();
+                    initUniverse();
+                }, 200);
+            });
+
+            function createStar() {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * (isMobile ? 1.2 : 1.8) + 0.3,
+                    brightness: Math.random() * 0.7 + 0.3,
+                    twinkleSpeed: Math.random() * 0.025 + 0.005,
+                    twinklePhase: Math.random() * Math.PI * 2,
+                    color: Math.random() > 0.7 ? `hsl(${Math.random() * 60 + 200}, 85%, 75%)` : '#ffffff'
+                };
+            }
+
+            function createComet() {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * (isMobile ? 1.2 : 2) + 0.8;
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height * 0.2,
+                    vx: Math.cos(angle) * speed * 0.6,
+                    vy: Math.sin(angle) * speed * 0.6 + 0.2,
+                    length: Math.random() * (isMobile ? 40 : 60) + 20,
+                    radius: Math.random() * (isMobile ? 1.2 : 2) + 0.8,
+                    brightness: Math.random() * 0.6 + 0.4,
+                    hue: Math.random() * 60 + 200
+                };
+            }
+
+            function createParticle() {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: (Math.random() - 0.5) * 0.3,
+                    life: Math.random() * 100 + 50,
+                    maxLife: Math.random() * 100 + 50,
+                    color: `hsla(${Math.random() * 60 + 200}, 80%, 70%, ${Math.random() * 0.3 + 0.1})`
+                };
+            }
+
+            function initUniverse() {
+                stars = [];
+                for (let i = 0; i < counts.stars; i++) stars.push(createStar());
+                comets = [];
+                for (let i = 0; i < counts.comets; i++) comets.push(createComet());
+                particles = [];
+                for (let i = 0; i < counts.particles; i++) particles.push(createParticle());
+            }
+
+            function drawStar(star, time) {
+                const twinkle = 0.5 + 0.5 * Math.sin(time * star.twinkleSpeed + star.twinklePhase);
+                const alpha = star.brightness * twinkle;
+
+                const gradient = ctx.createRadialGradient(
+                    star.x, star.y, 0,
+                    star.x, star.y, star.radius * 3
+                );
+                gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.8})`);
+                gradient.addColorStop(0.3, `rgba(200, 220, 255, ${alpha * 0.3})`);
+                gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius * 3, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = star.color || `rgba(255, 255, 255, ${alpha})`;
+                ctx.shadowColor = `rgba(200, 220, 255, ${alpha * 0.3})`;
+                ctx.shadowBlur = 15;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            function drawComet(comet, time) {
+                const alpha = comet.brightness * (0.7 + 0.3 * Math.sin(time * 0.001 + comet.x));
+
+                const tailLength = comet.length;
+                const gradient = ctx.createRadialGradient(
+                    comet.x, comet.y, 0,
+                    comet.x - comet.vx * 0.5, comet.y - comet.vy * 0.5, tailLength
+                );
+
+                const hue = comet.hue;
+                gradient.addColorStop(0, `hsla(${hue}, 100%, 95%, ${alpha * 0.9})`);
+                gradient.addColorStop(0.15, `hsla(${hue - 10}, 100%, 80%, ${alpha * 0.6})`);
+                gradient.addColorStop(0.4, `hsla(${hue - 30}, 90%, 60%, ${alpha * 0.3})`);
+                gradient.addColorStop(0.7, `hsla(${hue - 50}, 70%, 40%, ${alpha * 0.1})`);
+                gradient.addColorStop(1, `hsla(${hue - 70}, 50%, 20%, 0)`);
+
+                ctx.beginPath();
+                const tailX = comet.x - comet.vx * 0.7;
+                const tailY = comet.y - comet.vy * 0.7;
+                ctx.moveTo(comet.x, comet.y);
+                ctx.quadraticCurveTo(
+                    tailX - comet.vy * 0.3,
+                    tailY + comet.vx * 0.3,
+                    tailX - comet.vx * 0.3,
+                    tailY - comet.vy * 0.3
+                );
+                ctx.quadraticCurveTo(
+                    tailX + comet.vy * 0.3,
+                    tailY - comet.vx * 0.3,
+                    comet.x, comet.y
+                );
+                ctx.closePath();
+
+                ctx.fillStyle = gradient;
+                ctx.shadowColor = `hsla(${hue}, 100%, 70%, ${alpha * 0.4})`;
+                ctx.shadowBlur = 30;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                const headGradient = ctx.createRadialGradient(
+                    comet.x, comet.y, 0,
+                    comet.x, comet.y, comet.radius * 4
+                );
+                headGradient.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.95})`);
+                headGradient.addColorStop(0.2, `hsla(${hue}, 100%, 90%, ${alpha * 0.6})`);
+                headGradient.addColorStop(0.5, `hsla(${hue}, 100%, 70%, ${alpha * 0.2})`);
+                headGradient.addColorStop(1, `hsla(${hue}, 100%, 50%, 0)`);
+
+                ctx.beginPath();
+                ctx.arc(comet.x, comet.y, comet.radius * 4, 0, Math.PI * 2);
+                ctx.fillStyle = headGradient;
+                ctx.shadowColor = `hsla(${hue}, 100%, 80%, ${alpha * 0.5})`;
+                ctx.shadowBlur = 40;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                ctx.beginPath();
+                ctx.arc(comet.x, comet.y, comet.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.95})`;
+                ctx.shadowColor = `rgba(255, 255, 255, ${alpha * 0.6})`;
+                ctx.shadowBlur = 25;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            function drawParticle(particle) {
+                const lifeRatio = particle.life / particle.maxLife;
+                const alpha = lifeRatio * 0.5;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius * lifeRatio, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.shadowColor = 'rgba(200, 220, 255, 0.1)';
+                ctx.shadowBlur = 5;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            function updateComet(comet) {
+                comet.x += comet.vx;
+                comet.y += comet.vy;
+
+                comet.vx += Math.sin(comet.y * 0.008) * 0.004;
+                comet.vy += Math.cos(comet.x * 0.008) * 0.004;
+
+                const speed = Math.sqrt(comet.vx * comet.vx + comet.vy * comet.vy);
+                const maxSpeed = isMobile ? 2.5 : 3.5;
+                if (speed > maxSpeed) {
+                    comet.vx = (comet.vx / speed) * maxSpeed * 0.8;
+                    comet.vy = (comet.vy / speed) * maxSpeed * 0.8;
+                }
+
+                const margin = 100;
+                if (comet.x < -margin || comet.x > width + margin ||
+                    comet.y < -margin || comet.y > height + margin) {
+                    Object.assign(comet, createComet());
+                    comet.x = Math.random() * width;
+                    comet.y = Math.random() * height * 0.2;
+                }
+            }
+
+            function updateParticle(particle) {
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+                particle.life--;
+
+                if (particle.life <= 0 || particle.x < 0 || particle.x > width || 
+                    particle.y < 0 || particle.y > height) {
+                    Object.assign(particle, createParticle());
+                    particle.x = Math.random() * width;
+                    particle.y = Math.random() * height;
+                }
+            }
+
+            function animate(time) {
+                if (time - lastTime < 16) {
+                    animationId = requestAnimationFrame(animate);
+                    return;
+                }
+                lastTime = time;
+
+                ctx.clearRect(0, 0, width, height);
+
+                for (const star of stars) drawStar(star, time);
+                for (const comet of comets) {
+                    updateComet(comet);
+                    drawComet(comet, time);
+                }
+                for (const particle of particles) {
+                    updateParticle(particle);
+                    drawParticle(particle);
+                }
+
+                animationId = requestAnimationFrame(animate);
+            }
+
+            function startUniverse() {
+                resizeCanvas();
+                initUniverse();
+                if (animationId) cancelAnimationFrame(animationId);
+                lastTime = 0;
+                animate(0);
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                } else {
+                    if (!animationId) {
+                        lastTime = 0;
+                        animate(0);
+                    }
+                }
+            });
+
+            if (document.readyState === 'complete') {
+                startUniverse();
+            } else {
+                window.addEventListener('load', startUniverse);
+            }
+        })();
+    </script>
 
 </body>
 </html>
