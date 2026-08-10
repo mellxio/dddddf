@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giới thiệu bản thân · Vũ trụ</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- CSS riêng -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== CANVAS HIỆU ỨNG VŨ TRỤ ===== -->
+    <canvas id="universe-canvas"></canvas>
+
+    <!-- ===== CARD GIỚI THIỆU ===== -->
+    <div class="card">
+
+        <div class="avatar">
+            <i class="fas fa-user-astronaut"></i>
+        </div>
+
+        <h1>Minh Khôi</h1>
+
+        <div class="bio">
+            <i class="fas fa-quote-left" style="opacity: 0.4; margin-right: 6px;"></i>
+            Khám phá vũ trụ &amp; kết nối không giới hạn
+            <i class="fas fa-quote-right" style="opacity: 0.4; margin-left: 6px;"></i>
+        </div>
+
+        <div class="social-grid">
+            <a href="#" class="social-btn btn-youtube highlight-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="#" class="social-btn btn-x highlight-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-x-twitter"></i> X
+            </a>
+            <a href="#" class="social-btn btn-instagram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="#" class="social-btn btn-github" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="#" class="social-btn btn-tiktok" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+        </div>
+
+        <div class="footer-note">
+            <i class="fas fa-link" style="margin-right: 6px;"></i>
+            YouTube &amp; X đang dùng link giữ chỗ — hãy thay bằng URL của bạn
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <!-- Social links handler -->
+    <script src="social.js" defer></script>
+    <!-- Universe effect (tải sau để không block render) -->
+    <script src="universe.js" defer></script>
+
+</body>
+</html>
