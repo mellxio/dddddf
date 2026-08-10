@@ -1,0 +1,291 @@
+/* ===== RESET & CƠ BẢN ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    background: #050510;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===== LỚP PHỦ HIỆU ỨNG VŨ TRỤ ===== */
+#universe-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ===== THẺ CARD CHÍNH ===== */
+.card {
+    max-width: 820px;
+    width: 100%;
+    background: rgba(10, 10, 30, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 3.5rem;
+    padding: 2.8rem 2.5rem;
+    box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.9),
+                inset 0 1px 2px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+    text-align: center;
+    position: relative;
+    z-index: 20;
+}
+
+/* avatar */
+.avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe, #fd79a8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 12px 24px -8px rgba(108, 92, 231, 0.5),
+                0 0 60px rgba(108, 92, 231, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    position: relative;
+    animation: glowPulse 3s ease-in-out infinite;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+}
+
+.avatar:hover {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 12px 24px -8px rgba(108, 92, 231, 0.5), 0 0 60px rgba(108, 92, 231, 0.2); }
+    50% { box-shadow: 0 12px 40px -8px rgba(108, 92, 231, 0.8), 0 0 80px rgba(108, 92, 231, 0.4); }
+}
+
+.avatar i {
+    font-size: 4.5rem;
+    color: white;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 0 30px rgba(162, 155, 254, 0.3);
+}
+
+.bio {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #c8c0e8;
+    max-width: 500px;
+    margin: 0.5rem auto 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.8rem 1.8rem;
+    border-radius: 60px;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ===== NÚT MẠNG XÃ HỘI ===== */
+.social-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.2rem;
+    margin: 2.2rem 0 1.2rem;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.75rem 1.8rem;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #e0d8f0;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(4px);
+    flex: 0 1 auto;
+    min-width: 130px;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.social-btn i {
+    font-size: 1.3rem;
+    width: 1.6rem;
+    text-align: center;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hiệu ứng hover */
+.social-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.4);
+}
+
+.social-btn:hover i {
+    transform: scale(1.1);
+}
+
+/* Hiệu ứng active (khi nhấn) */
+.social-btn:active {
+    transform: scale(0.92) translateY(0px);
+    transition-duration: 0.08s;
+}
+
+/* Màu sắc riêng cho từng nền tảng */
+.btn-youtube {
+    border-color: rgba(255, 0, 0, 0.15);
+}
+.btn-youtube i { color: #ff0000; }
+.btn-youtube:hover {
+    background: #ff0000;
+    border-color: #ff0000;
+    color: white;
+    box-shadow: 0 16px 28px -8px rgba(255, 0, 0, 0.4);
+}
+.btn-youtube:hover i { color: white; }
+
+.btn-x {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.btn-x i { color: #ffffff; }
+.btn-x:hover {
+    background: #000000;
+    border-color: #ffffff;
+    color: white;
+    box-shadow: 0 16px 28px -8px rgba(255, 255, 255, 0.2);
+}
+.btn-x:hover i { color: white; }
+
+.btn-instagram {
+    border-color: rgba(228, 64, 95, 0.15);
+}
+.btn-instagram i { color: #e4405f; }
+.btn-instagram:hover {
+    background: #e4405f;
+    border-color: #e4405f;
+    color: white;
+    box-shadow: 0 16px 28px -8px rgba(228, 64, 95, 0.4);
+}
+.btn-instagram:hover i { color: white; }
+
+.btn-github {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.btn-github i { color: #ffffff; }
+.btn-github:hover {
+    background: #181717;
+    border-color: #ffffff;
+    color: white;
+    box-shadow: 0 16px 28px -8px rgba(255, 255, 255, 0.15);
+}
+.btn-github:hover i { color: white; }
+
+.btn-tiktok {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+.btn-tiktok i { color: #ffffff; }
+.btn-tiktok:hover {
+    background: #010101;
+    border-color: #ffffff;
+    color: white;
+    box-shadow: 0 16px 28px -8px rgba(255, 255, 255, 0.15);
+}
+.btn-tiktok:hover i { color: white; }
+
+.highlight-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(162, 155, 254, 0.2);
+    font-weight: 700;
+    padding: 0.8rem 2.2rem;
+}
+
+.footer-note {
+    margin-top: 1.8rem;
+    font-size: 0.8rem;
+    color: #6a5a82;
+    opacity: 0.5;
+    border-top: 1px dashed rgba(162, 155, 254, 0.1);
+    padding-top: 1.2rem;
+}
+
+/* ===== HIỆU ỨNG RIPPLE KHI NHẤN ===== */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes rippleAnim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 550px) {
+    .card {
+        padding: 2rem 1.2rem;
+        border-radius: 2.5rem;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .social-btn {
+        min-width: 110px;
+        padding: 0.65rem 1.2rem;
+        font-size: 0.9rem;
+        flex: 1 1 40%;
+    }
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+    .avatar i {
+        font-size: 3.5rem;
+    }
+    .bio {
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .social-grid {
+        gap: 0.7rem;
+    }
+    .social-btn {
+        min-width: 100%;
+    }
+}
